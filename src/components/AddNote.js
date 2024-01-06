@@ -29,7 +29,7 @@ return (
             <textarea className="form-control" id="description" name='description' onChange={onchange}  rows="3"></textarea>
 
         </div>
-        <button type='submit' className='btn btn-primary' onClick={handleclick}>Submit</button>
+        <button type='submit' className='btn btn-primary' onClick={handleclick}>Add Note</button>
     </div>
 )
 }
