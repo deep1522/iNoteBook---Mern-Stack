@@ -1,32 +1,45 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
-import About from './components/About';
-import Alert from './components/Alert';
-import Home from './components/Home';
-import Login from './components/Login';
-import Navbar from './components/Navbar';
-import Signup from './components/Signup';
-import NoteState from './context/notes/NoteState';
+import "./App.css";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Test from "./components/Test";
+import Home from "./components/Home";
+import NoteState from "./context/notes/noteState";
+import About from "./components/About";
+import Alert from "./components/Alert";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import{ useState } from 'react';
 
 function App() {
+  const[alert, setAlert] = useState(null);
+  const showAlert =(message,type)=> { //to show alert messages
+    setAlert({
+      msg: message,
+      type: type
+    })
+    setTimeout(() =>{
+      setAlert(null)
+    },1500)
+  }
   return (
     <>
-    <NoteState>
-    <BrowserRouter>
-    <Navbar/>
-    <Alert message=""/>
-    <div className="container">
-      
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/signup' element={<Signup/>}/>
+      <NoteState>
+        <BrowserRouter>
+          <Navbar />
+          <Alert alert={alert}/>
+          <div className="container">
+            <Routes>
+              <Route exact path="/" element={<Home showAlert={showAlert}/>} />
+              <Route exact path="/about" element={<About />} />
+              <Route exact path="/test" element={<Test />} />
+              <Route exact path="/login" element={<Login showAlert={showAlert}/>} />
+              <Route exact path="/signup" element={<Signup showAlert={showAlert}/>} />
 
-      </Routes>
-      </div>
-    </BrowserRouter>
-    </NoteState>
+
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </NoteState>
     </>
   );
 }
